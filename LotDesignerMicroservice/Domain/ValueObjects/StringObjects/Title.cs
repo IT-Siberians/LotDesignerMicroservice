@@ -1,4 +1,6 @@
 ﻿using LotDesignerMicroservice.Domain.ValueObjects.BaseObjects;
+using LotDesignerMicroservice.Domain.ValueObjects.Constants;
+using LotDesignerMicroservice.Domain.ValueObjects.Exceptions;
 
 namespace LotDesignerMicroservice.Domain.ValueObjects.StringObjects
 {
@@ -6,16 +8,18 @@ namespace LotDesignerMicroservice.Domain.ValueObjects.StringObjects
     /// Represents type of the entity's title
     /// </summary>
     /// <param name="value"> Title's string value </param>
-    public sealed class Title(string value) : StringObject(value)
+    public sealed class Title(string value) : StringValueObject(value, Validate)
     {
-        /// <summary>
-        /// Title's min value lenght
-        /// </summary>
-        public override int MIN_LENGHT => 3;
+        static void Validate(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new StringObjectEmptyOrWhiteSpacesException(typeof(Title), value);
 
-        /// <summary>
-        /// Title's max value lenght
-        /// </summary>
-        public override int MAX_LENGHT => 50;
+            if (value.Length < TitleConstants.MIN_LENGHT)
+                throw new StringObjectMinLenghtException(typeof(Title), value.Length, TitleConstants.MIN_LENGHT);
+
+            if (value.Length > TitleConstants.MAX_LENGHT)
+                throw new StringObjectMaxLenghtException(typeof(Title), value.Length, TitleConstants.MAX_LENGHT);
+        }
     }
 }

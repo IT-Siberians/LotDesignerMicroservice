@@ -1,4 +1,6 @@
 ﻿using LotDesignerMicroservice.Domain.ValueObjects.BaseObjects;
+using LotDesignerMicroservice.Domain.ValueObjects.Constants;
+using LotDesignerMicroservice.Domain.ValueObjects.Exceptions;
 
 namespace LotDesignerMicroservice.Domain.ValueObjects.StringObjects
 {
@@ -6,16 +8,18 @@ namespace LotDesignerMicroservice.Domain.ValueObjects.StringObjects
     /// Represents type of the entity's user name
     /// </summary>
     /// <param name="value"> User name's string value </param>
-    public sealed class UserName(string value) : StringObject(value)
+    public sealed class UserName(string value) : StringValueObject(value, Validate)
     {
-        /// <summary>
-        /// User name's min value lenght
-        /// </summary>
-        public override int MIN_LENGHT => 3;
+        static void Validate(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new StringObjectEmptyOrWhiteSpacesException(typeof(UserName), value);
 
-        /// <summary>
-        /// User name's max value lenght
-        /// </summary>
-        public override int MAX_LENGHT => 30;
+            if (value.Length < UserNameConstants.MIN_LENGHT)
+                throw new StringObjectMinLenghtException(typeof(UserName), value.Length, UserNameConstants.MIN_LENGHT);
+
+            if (value.Length > UserNameConstants.MAX_LENGHT)
+                throw new StringObjectMaxLenghtException(typeof(UserName), value.Length, UserNameConstants.MAX_LENGHT);
+        }
     }
 }

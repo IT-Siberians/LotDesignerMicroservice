@@ -1,4 +1,5 @@
 ﻿using LotDesignerMicroservice.Domain.Entities.Base;
+using LotDesignerMicroservice.Domain.Entities.Exceptions;
 using LotDesignerMicroservice.Domain.ValueObjects.StringObjects;
 
 namespace LotDesignerMicroservice.Domain.Entities.Entities
@@ -27,9 +28,9 @@ namespace LotDesignerMicroservice.Domain.Entities.Entities
         /// Initializes a new instance of a <see cref="Seller"></see> class
         /// </summary>
         /// <param name="userName"> Seller's username </param>
-        public Seller(UserName userName) : base()
+        public Seller(Guid id, UserName userName) : base()
         {
-            Id = Guid.NewGuid();
+            Id = id;
             UserName = userName;
         }
 
@@ -46,8 +47,10 @@ namespace LotDesignerMicroservice.Domain.Entities.Entities
         /// <param name="newLotCard"> New seller lot card </param>
         public void CreateLotCard(LotCard newLotCard)
         {
-            if (!_lotCards.Contains(newLotCard))
-                _lotCards.Add(newLotCard);
+            if (_lotCards.Contains(newLotCard))
+                throw new EntityEqualedValueException(GetType(), nameof(LotCard));
+
+            _lotCards.Add(newLotCard);
         }
 
         /// <summary>
@@ -56,8 +59,10 @@ namespace LotDesignerMicroservice.Domain.Entities.Entities
         /// <param name="newUserName"> New seller user name </param>
         public void ChangeUserName(UserName newUserName)
         {
-            if (!UserName.Equals(newUserName))
-                UserName = newUserName;
+            if (UserName.Equals(newUserName))
+                throw new EntityEqualedValueException(GetType(), nameof(UserName));
+
+            UserName = newUserName;
         }
     }
 }

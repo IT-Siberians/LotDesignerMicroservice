@@ -23,7 +23,6 @@ namespace LotDesignerMicroservice.Domain.Entities.Entities
         /// <param name="url"> Image source url </param>
         public Image(Uri url, LotCard lotCard)
         {
-            Id = Guid.NewGuid();
             Url = url;
             LotCard = lotCard;
         }

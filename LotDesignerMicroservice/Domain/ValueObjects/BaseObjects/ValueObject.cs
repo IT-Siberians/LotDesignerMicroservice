@@ -1,4 +1,5 @@
 ﻿using LotDesignerMicroservice.Domain.ValueObjects.Exceptions;
+using System.Numerics;
 
 namespace LotDesignerMicroservice.Domain.ValueObjects.BaseObjects
 {
@@ -6,20 +7,20 @@ namespace LotDesignerMicroservice.Domain.ValueObjects.BaseObjects
     /// Represents object that always has not null value
     /// </summary>
     /// <typeparam name="T"> Stored value type </typeparam>
-    public abstract class ValueObject<T> : IEquatable<ValueObject<T>>
+    public abstract class ValueObject<T> :
+        IEquatable<ValueObject<T>>,
+        IEqualityOperators<ValueObject<T>, ValueObject<T>, bool>
     {
         /// <summary>
         /// General constructor for all value objects
         /// </summary>
         /// <param name="value"></param>
-        public ValueObject(T value, Action<T>? validate = null)
+        public ValueObject(T value, Action<T> validate)
         {
             if (value == null)
                 throw new ValueObjectNullException(GetType());
 
-            if (validate != null)
-                validate(value);
-
+            validate.Invoke(value);
             Value = value;
         }
 

@@ -1,4 +1,6 @@
 ﻿using LotDesignerMicroservice.Domain.ValueObjects.BaseObjects;
+using LotDesignerMicroservice.Domain.ValueObjects.Constants;
+using LotDesignerMicroservice.Domain.ValueObjects.Exceptions;
 
 namespace LotDesignerMicroservice.Domain.ValueObjects.StringObjects
 {
@@ -6,16 +8,18 @@ namespace LotDesignerMicroservice.Domain.ValueObjects.StringObjects
     /// Represents text object that always has not null, not empty and not only white spaces unlimited lenght string value
     /// </summary>
     /// <param name="value"> Description string value </param>
-    public sealed class Text(string value) : StringObject(value)
+    public sealed class Text(string value) : StringValueObject(value, Validate)
     {
-        /// <summary>
-        /// Text's min value lenght
-        /// </summary>
-        public override int MIN_LENGHT => 10;
+        static void Validate(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new StringObjectEmptyOrWhiteSpacesException(typeof(Text), value);
 
-        /// <summary>
-        /// Text's max value lenght
-        /// </summary>
-        public override int MAX_LENGHT => 20000;
+            if (value.Length < TextConstants.MIN_LENGHT)
+                throw new StringObjectMinLenghtException(typeof(Text), value.Length, TextConstants.MIN_LENGHT);
+
+            if (value.Length > TextConstants.MAX_LENGHT)
+                throw new StringObjectMaxLenghtException(typeof(Text), value.Length, TextConstants.MAX_LENGHT);
+        }
     }
 }

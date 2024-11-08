@@ -9,6 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotDesignerMicroservice.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotDesignerMicroservice.Domain.Entities", "Domain\Entities\LotDesignerMicroservice.Domain.Entities.csproj", "{E9657603-CAE6-4C83-979E-A1336EEEA6B0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotDesignerMicroservice.Domain.RepositoriesAbstractions", "Domain\RepositoriesAbstractions\LotDesignerMicroservice.Domain.RepositoriesAbstractions.csproj", "{8CFEA819-BF22-4B3C-B1B4-19BB327412A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8BA745FA-4F82-4939-8BAE-257B596CDCAA}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\InMemoryRepository\InMemoryRepository\LotDesignerMicroservice.Infrastructure.InMemoryRepository.csproj = Infrastructure\InMemoryRepository\InMemoryRepository\LotDesignerMicroservice.Infrastructure.InMemoryRepository.csproj
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotDesignerMicroservice.Infrastructure.EfRepository", "Infrastructure\EfRepository\LotDesignerMicroservice.Infrastructure.EfRepository.csproj", "{EDD08918-14FB-4BFA-BEBD-16527ECC7560}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +32,14 @@ Global
 		{E9657603-CAE6-4C83-979E-A1336EEEA6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9657603-CAE6-4C83-979E-A1336EEEA6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9657603-CAE6-4C83-979E-A1336EEEA6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CFEA819-BF22-4B3C-B1B4-19BB327412A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFEA819-BF22-4B3C-B1B4-19BB327412A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFEA819-BF22-4B3C-B1B4-19BB327412A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFEA819-BF22-4B3C-B1B4-19BB327412A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD08918-14FB-4BFA-BEBD-16527ECC7560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD08918-14FB-4BFA-BEBD-16527ECC7560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD08918-14FB-4BFA-BEBD-16527ECC7560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD08918-14FB-4BFA-BEBD-16527ECC7560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +47,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0986D0AF-8F57-4335-A62A-585958B9CC69} = {C2A33D92-D176-4142-9583-63765512A58A}
 		{E9657603-CAE6-4C83-979E-A1336EEEA6B0} = {C2A33D92-D176-4142-9583-63765512A58A}
+		{8CFEA819-BF22-4B3C-B1B4-19BB327412A4} = {C2A33D92-D176-4142-9583-63765512A58A}
+		{EDD08918-14FB-4BFA-BEBD-16527ECC7560} = {8BA745FA-4F82-4939-8BAE-257B596CDCAA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBF268CB-6CE4-45C7-9561-E56D2179C411}
